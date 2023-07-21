@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('bar_codes', function (Blueprint $table) {
             $table->id();
             $table->string('codigo');
-            $table->float('dimensao');
+            $table->float('largura');
+            $table->float('altura');
             $table->timestamps();
             $table->softDeletes();
         });

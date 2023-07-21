@@ -13,6 +13,7 @@ class BarCode extends Model
 
     protected $fillable=[
         'codigo',
-        'dimensao',
+        'altura',
+        'largura',
     ];
 }

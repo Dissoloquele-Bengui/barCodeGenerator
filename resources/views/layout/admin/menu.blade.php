@@ -19,7 +19,8 @@
 
 
         <li class="nav-item dropdown">
-            <a class="nav-link pl-3" href="{{ route('admin.barcode.create') }}"><span class="ml-1 item-text">Gerar Código De Barras</span></a>
+            <a class="nav-link pl-3" data-toggle="modal" data-target="#varyModal" data-whatever="@mdo"> Gerar Código De Barras</a>
+            <a class="nav-link pl-3" data-toggle="modal" data-target="#verifyModal" data-whatever="@mdo"> Verificar o Código</a>
         </li>
 
     </ul>

@@ -38,29 +38,19 @@
                 <table class="table table-borderless table-hover">
                   <thead class="thead-dark">
                     <tr>
-                      <th>ID</th>
                       <th>Código</th>
-                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($barCodes as $barCode)
+                    @foreach ($codigos as $codigo)
                     <tr>
                         <td>
-                          <p class="mb-0 text-muted"><strong>{{$barCode->id }}</strong></p>
+                            {{ $code=$codigo['codigo'] }}
+                            {{ $altura=$codigo['altura'] }}
+                            {{ $largura=$codigo['largura'] }}
+                          <p class="mb-0 text-muted" > <strong id="codeBar">{!!DNS1D::getcodigoHTML("$code",'CODABAR',0.4*$largura,40*$altura)!!}</strong> </p>
+                          <p> {{ $codigo }}</p>
                         </td>
-                        <td>
-                          <p class="mb-0 text-muted" > <strong id="codeBar">{!!DNS1D::getBarcodeHTML("$barCode->codigo",'CODABAR',0.4*$barCode->largura,40*$barCode->altura)!!}</strong> </p>
-                          <p> {{ $barCode->codigo }}</p>
-                        </td>
-                        <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="text-muted sr-only">Action</span>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="{{route('admin.barcode.destroy',['id'=>$barCode->id])}}">Remove</a>
-                                <a class="dropdown-item" href="{{route('admin.barcode.purge',['id'=>$barCode->id])}}">Purge</a>
-                            </div>
-                            </td>
                         </tr>
 
                     @endforeach
@@ -94,10 +84,10 @@
             </button>
         </div>
         <div class="modal-body">
-            <form action="{{route('admin.barcode.store')}}" method="post">
+            <form action="{{route('admin.codigo.store')}}" method="post">
             @csrf
             <div class="card-body">
-                @include('_form._barCodeForm.index')
+                @include('_form._codigoForm.index')
             </div>
 
         </div>
@@ -119,10 +109,10 @@
             </button>
         </div>
         <div class="modal-body">
-            <form action="{{route('admin.barcode.verify')}}" method="post">
+            <form action="{{route('admin.codigo.verify')}}" method="post">
             @csrf
             <div class="card-body">
-                @include('_form._verifyBarCodeForm.index')
+                @include('_form._verifycodigoForm.index')
             </div>
 
         </div>

@@ -44,27 +44,29 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($barCodes as $barCode)
-                    <tr>
-                        <td>
-                          <p class="mb-0 text-muted"><strong>{{$barCode->id }}</strong></p>
-                        </td>
-                        <td>
-                          <p class="mb-0 text-muted" > <strong id="codeBar">{!!DNS1D::getBarcodeHTML("$barCode->codigo",'CODABAR',0.4*$barCode->largura,40*$barCode->altura)!!}</strong> </p>
-                          <p> {{ $barCode->codigo }}</p>
-                        </td>
-                        <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="text-muted sr-only">Action</span>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="{{route('admin.barcode.destroy',['id'=>$barCode->id])}}">Remove</a>
-                                <a class="dropdown-item" href="{{route('admin.barcode.purge',['id'=>$barCode->id])}}">Purge</a>
-                            </div>
+                    @if(isset($barCodes))
+                        <p class="mb-0 text-muted"><strong>Não existe esse código</strong></p>
+                        <tr>
+                            <td>
+                            <p class="mb-0 text-muted"><strong>{{$barCode->id }}</strong></p>
                             </td>
+                            <td>
+                            <p class="mb-0 text-muted"> <strong>{!!DNS1D::getBarcodeHTML("$barCode->codigo",'CODABAR',$barCode->dimensao*0.5,$barCode->dimensao*20)!!}</strong> </p>
+                            <p> {{ $barCode->codigo }}</p>
+                            </td>
+                            <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="text-muted sr-only">Action</span>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="{{route('admin.barcode.destroy',['id'=>$barCode->id])}}">Remove</a>
+                                    <a class="dropdown-item" href="{{route('admin.barcode.purge',['id'=>$barCode->id])}}">Purge</a>
+                                </div>
+                                </td>
                         </tr>
-
-                    @endforeach
-
+                    @endif
+                    @if(!isset($barCode))
+                        <p class="mb-0 text-muted"><strong>Não existe esse código</strong></p>
+                    @endif
                   </tbody>
                 </table>
                 <nav aria-label="Table Paging" class="mb-0 text-muted">
@@ -98,6 +100,7 @@
             @csrf
             <div class="card-body">
                 @include('_form._barCodeForm.index')
+
             </div>
 
         </div>

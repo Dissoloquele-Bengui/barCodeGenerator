@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Milon\Barcode\DNS1D;
 use Picqer\Barcode\BarcodeGeneratorHTML;
+use PDF;
 class BarCodeController extends Controller
 {
     //
@@ -48,26 +49,42 @@ class BarCodeController extends Controller
             $qtdVezes = (int) $request->qtd;
             for ($i = 0; $i < $qtdVezes; $i++) {
                 do{
-                    $codigo = mt_rand(1000000, 999999999);
+                    $codigo = mt_rand(1000000, 99999999);
                 }while(BarCode::where('codigo',$codigo)->exists());
+                array_push($codigos,$codigo);
                 $barCode = BarCode::create([
-                    'dimensao' => $request->dimensao,
                     'codigo' => $codigo,
+                    'altura' => $request->altura,
+                    'largura' => $request->largura,
                 ]);
 
             }
 
-
             //dd($barCode);
-            $barCodes=BarCode::all();
-            return view('admin.barCode.index',['barCodes'=>$barCodes]);
+            return redirect()->back()->with('Ano.create.error', 1);
         } catch (\Throwable $th) {
             throw $th;
             dd($th);
             return redirect()->back()->with('Ano.create.error', 1);
         }
     }
+    public function verify(Request $request)
+    {
 
+        try {
+            //dd($request);
+            // Certifique-se de converter $request->qtd para um número inteiro
+            $barCode = BarCode::where('codigo',$request->codigo)->first();
+                        //dd($barCode);
+
+            return view('admin.barCode.verify',['barCode'=>$barCode]);
+            //dd($barCode);
+        } catch (\Throwable $th) {
+            throw $th;
+            dd($th);
+            return redirect()->back()->with('Ano.create.error', 1);
+        }
+    }
 
     /**
      * Display the specified resource.
