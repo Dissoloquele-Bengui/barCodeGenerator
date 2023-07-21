@@ -12,7 +12,8 @@
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
         "milon/barcode": "^10.0",
-        "mpdf/mpdf": "^6.1"
+        "mpdf/mpdf": "^8.1",
+        "psr/http-message": "^1.0 || ^2.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
