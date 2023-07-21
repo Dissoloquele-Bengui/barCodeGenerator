@@ -59,7 +59,6 @@ class BarCodeController extends Controller
                 ]);
 
             }
-
             //dd($barCode);
             return redirect()->back()->with('Ano.create.error', 1);
         } catch (\Throwable $th) {
