@@ -56,7 +56,7 @@ class BarCodeController extends Controller
             $barCodesGerados = array();
             for ($i = 0; $i < $qtdVezes; $i++) {
                 do {
-                    $codigo = mt_rand(1, 666);
+                    $codigo = mt_rand(1, 999);
                 } while (BarCode::where('codigo', $codigo)->exists());
                 array_push($codigos, $codigo);
                 $barCode = BarCode::create([

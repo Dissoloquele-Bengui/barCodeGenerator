@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.barcode.index');
 });
 Route::prefix('barcode')->group(function () {
     Route::get('index', ['as' => 'admin.barcode.index', 'uses' => 'App\Http\Controllers\BarCodeController@index']);

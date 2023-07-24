@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-5">
         <div class="form-group mb-3">
             <label for="qtd">Quantidade de Códigos</label>
             <input required type="number" id="qtd" name="qtd" class="form-control" value="">
@@ -9,7 +9,7 @@
             <input required type="number" id="altura" name="altura" class="form-control" value="">
         </div>
     </div> <!-- /.col -->
-    <div class="col-md-6">
+    <div class="col-md-5">
 
         <div class="form-group mb-3">
             <label for="largura">Largura</label>

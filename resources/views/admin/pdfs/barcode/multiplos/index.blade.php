@@ -4,24 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Códigos de Barras</title>
+        <style>
+            td{
+                padding:15px !important;
+                border:0;
+                width:200px;
+                height:100px;
+
+            }
+            table{
+                border:0;
+            }
+        </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="my-4">Códigos de Barras</h1>
-
-        <div class="row d-flex col-12">
-
-            @foreach ($barCodes as $barCode)
-                <div class="" >
-                    <div class="card col-4" style="width:5px !important">
-                        <img src="data:image/png;base64,{{ base64_encode($gerador->getBarcode($barCode->codigo, $gerador::TYPE_CODE_128,$barCode->largura,$barCode->altura*15)) }}" class="card-img-top col-12" alt="Código de Barras" style="width:8px !important" >
-                        <div class="  col-12 " style="width:10px !important  ">
-                            <p style="padding-left:20px"  class=" d-flex justify-text-center" >{{ $barCode->codigo }}</p>
-                        </div>
-                    </div>
+    <table>
+        @php $i = 0; @endphp
+        @foreach ($barCodes as $barCode)
+            @if ($i % 4 === 0)
+                <tr>
+            @endif
+            <td >
+                <img src="data:image/png;base64,{{ base64_encode($gerador->getBarcode($barCode->codigo, $gerador::TYPE_CODABAR,$barCode->largura*0.99,$barCode->altura*15)) }}" class="barcode->image" alt="Código de Barras" style="width:8px !important" >
+                <div class="barcode-text">
+                    <p>{{ $barCode->codigo }}</p>
                 </div>
-            @endforeach
-        </div>
-    </div>
+            </td>
+            @php $i++; @endphp
+            @if ($i % 4 === 0 || $loop->last)
+                </tr>
+            @endif
+        @endforeach
+    </table>
 </body>
 </html>

@@ -4,7 +4,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="{{ asset('favicon.ico') }}">
-    <title>MySGE-@yield('titulo')</title>
+    <title>CodeGenerator - @yield('titulo')</title>
     <!-- Simple bar CSS -->
     <link rel="stylesheet" href="{{ asset('css/simplebar.css') }}">
     <!-- Fonts CSS -->
