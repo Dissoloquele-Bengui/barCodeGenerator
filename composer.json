@@ -13,6 +13,7 @@
         "laravel/tinker": "^2.8",
         "milon/barcode": "^10.0",
         "mpdf/mpdf": "^8.1",
+        "picqer/php-barcode-generator": "^2.2",
         "psr/http-message": "^1.0 || ^2.0"
     },
     "require-dev": {

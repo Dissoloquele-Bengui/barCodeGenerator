@@ -2,7 +2,9 @@
 @section('titulo','Listar Códigos de barra')
 
 @section('conteudo')
+@php
 
+@endphp
 <div class="container-fluid">
 
     <div class="row justify-content-center">
@@ -45,13 +47,18 @@
                   </thead>
                   <tbody>
                     @foreach ($barCodes as $barCode)
+
+
                         <tr>
                             <td>
                             <p class="mb-0 text-muted"><strong>{{$barCode->id }}</strong></p>
                             </td>
                             <td>
-                            <p class="mb-0 text-muted"> <strong>{!!DNS1D::getBarcodeHTML("743348",'CODABAR')!!}</strong> </p>
+                            <p class="mb-0 text-muted"> <strong>
+                            {!! $generator->getBarcode('081231723897', $generator::TYPE_CODABAR); !!}
+                            </strong> </p>
                             <p> {{ $barCode->codigo }}</p>
+
                             </td>
                             <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="text-muted sr-only">Action</span>

@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use Milon\Barcode\DNS1D;
 use Picqer\Barcode\BarcodeGeneratorHTML;
 use PDF;
+use Picqer\Barcode\BarcodeGeneratorPNG;
+
 
 class BarCodeController extends Controller
 {
@@ -20,11 +22,9 @@ class BarCodeController extends Controller
     //
     public function index()
     {
-        $dados['barCodes'] = BarCode::all();
-
-
-       /*  dd("foi"); */
-        return view('admin.barCode.index', $dados);
+        $data['barCodes'] = BarCode::all();
+        $data['generator']=new BarcodeGeneratorHTML();
+        return view('admin.barCode.index', $data);
     }
 
     /**
@@ -56,7 +56,7 @@ class BarCodeController extends Controller
             $barCodesGerados = array();
             for ($i = 0; $i < $qtdVezes; $i++) {
                 do {
-                    $codigo = mt_rand(1000000, 99999999);
+                    $codigo = mt_rand(1, 666);
                 } while (BarCode::where('codigo', $codigo)->exists());
                 array_push($codigos, $codigo);
                 $barCode = BarCode::create([
@@ -65,31 +65,24 @@ class BarCodeController extends Controller
                     'largura' => $request->largura,
                 ]);
                 array_push($barCodes, $barCode);
-            }
 
-            foreach ($barCodes as $barCode) {
-                $gerar_code = DNS1D::getBarcodeHTML("$barCode->codigo",'CODABAR');
-               /*  echo $gerar_code;
-                echo "<br>"; */
-                array_push($barCodesGerados, $gerar_code);
             }
-
-           /*  dd("foi"); */
-            $dados["codigos"] = $codigos;
-            $dados["barCodes"] = $barCodesGerados;
-            //dd($barCodesGerados);
-            $html = view("admin/pdfs/barcode/multiplos/index", $dados)->render();
+            $dados['gerador']=new BarcodeGeneratorPNG();
+            $dados['barCodes'] = $barCodes;
+            //dd($dados["barCodes"] );
+            $html = view("admin/pdfs/barcode/multiplos/index", $dados);
             $css = file_get_contents("css/bootstrap.min.css");
             $css1 = file_get_contents("css/style.css");
             $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => "A4-P"]);
-
-            $html = view('admin.barCode.index', $dados)->render();
-
-            // Carregar o HTML renderizado no mPDF e gerar o PDF
+            $mpdf->SetFont("arial");
+            $mpdf->setHeader();
+            $mpdf->AddPage();
+            $mpdf->WriteHTML($css, \Mpdf\HTMLParserMode::HEADER_CSS);
+            $mpdf->WriteHTML($css1, \Mpdf\HTMLParserMode::HEADER_CSS);
             $mpdf->WriteHTML($html);
-            $mpdf->Output();
-
-
+            $mpdf->Output("Codigos_de_barra_multiplos" . ".pdf", "I");
+            //
+            return redirect()->back()->with('Ano.create.error', 1);
         } catch (\Throwable $th) {
             throw $th;
             dd($th);
