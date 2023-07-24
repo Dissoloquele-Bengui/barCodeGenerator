@@ -47,19 +47,12 @@
                     @foreach ($barCodes as $barCode)
                     <tr>
                         <td>
-                          <p class="mb-0 text-muted"><strong>{{$barCode->id }}</strong></p>
-                        </td>
-                        <td>
-                          <p class="mb-0 text-muted" > <strong id="codeBar">{!!DNS1D::getBarcodeHTML("$barCode->codigo",'CODABAR',0.4*$barCode->largura,40*$barCode->altura)!!}</strong> </p>
-                          <p> {{ $barCode->codigo }}</p>
+                          {!! $barCode !!}
                         </td>
                         <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="text-muted sr-only">Action</span>
                             </button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="{{route('admin.barcode.destroy',['id'=>$barCode->id])}}">Remove</a>
-                                <a class="dropdown-item" href="{{route('admin.barcode.purge',['id'=>$barCode->id])}}">Purge</a>
-                            </div>
+                           
                             </td>
                         </tr>
 
