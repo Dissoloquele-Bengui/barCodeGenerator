@@ -44,14 +44,13 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @if(isset($barCodes))
-                        <p class="mb-0 text-muted"><strong>Não existe esse código</strong></p>
+                    @if(isset($barCode))
                         <tr>
                             <td>
                             <p class="mb-0 text-muted"><strong>{{$barCode->id }}</strong></p>
                             </td>
                             <td>
-                            <p class="mb-0 text-muted"> <strong>{!!DNS1D::getBarcodeHTML("$barCode->codigo",'CODABAR',$barCode->dimensao*0.5,$barCode->dimensao*20)!!}</strong> </p>
+                            <p class="mb-0 text-muted"> <strong>{!!DNS1D::getBarcodeHTML("$barCode->codigo",'CODABAR',$barCode->largura*0.4,$barCode->altura*40)!!}</strong> </p>
                             <p> {{ $barCode->codigo }}</p>
                             </td>
                             <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -61,7 +60,7 @@
                                     <a class="dropdown-item" href="{{route('admin.barcode.destroy',['id'=>$barCode->id])}}">Remove</a>
                                     <a class="dropdown-item" href="{{route('admin.barcode.purge',['id'=>$barCode->id])}}">Purge</a>
                                 </div>
-                                </td>
+                            </td>
                         </tr>
                     @endif
                     @if(!isset($barCode))

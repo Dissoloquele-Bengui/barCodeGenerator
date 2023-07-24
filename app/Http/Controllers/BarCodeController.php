@@ -20,17 +20,10 @@ class BarCodeController extends Controller
     //
     public function index()
     {
-        $barCodes = BarCode::all();
-        $barCodesGerados = array();
-        foreach ($barCodes as $barCode) {
-            $gerar_code = DNS1D::getBarcodeHTML("$barCode->codigo",'CODABAR');
-           /*  echo $gerar_code;
-            echo "<br>"; */
-            array_push($barCodesGerados, $gerar_code);
-        }
+        $dados['barCodes'] = BarCode::all();
+
 
        /*  dd("foi"); */
-        $dados["barCodes"] = $barCodesGerados;
         return view('admin.barCode.index', $dados);
     }
 
@@ -72,7 +65,6 @@ class BarCodeController extends Controller
                     'largura' => $request->largura,
                 ]);
                 array_push($barCodes, $barCode);
-
             }
 
             foreach ($barCodes as $barCode) {
