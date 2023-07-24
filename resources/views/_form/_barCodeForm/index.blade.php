@@ -6,14 +6,14 @@
         </div>
         <div class="form-group mb-3">
             <label for="altura">Altura dos Códigos</label>
-            <input required type="number" id="altura" name="altura" class="form-control" value="">
+            <input required type="number" id="altura" name="altura" class="form-control" value="" step="any">
         </div>
     </div> <!-- /.col -->
     <div class="col-md-5">
 
         <div class="form-group mb-3">
             <label for="largura">Largura</label>
-            <input required type="number" id="largura" name="largura" class="form-control" value="">
+            <input required type="number" id="largura" name="largura" class="form-control" value="" step="any">
         </div>
     </div>
 </div>
