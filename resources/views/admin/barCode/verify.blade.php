@@ -50,7 +50,7 @@
                             <p class="mb-0 text-muted"><strong>{{$barCode->id }}</strong></p>
                             </td>
                             <td>
-                            <p class="mb-0 text-muted"> <strong>{!!DNS1D::getBarcodeHTML("$barCode->codigo",'CODABAR',$barCode->largura*0.4,$barCode->altura*40)!!}</strong> </p>
+                            <p class="mb-0 text-muted"> <strong>{!!$gerador->getBarcode($barCode->codigo, $gerador::TYPE_CODABAR,$barCode->largura*0.99,$barCode->altura*15)!!}</strong> </p>
                             <p> {{ $barCode->codigo }}</p>
                             </td>
                             <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

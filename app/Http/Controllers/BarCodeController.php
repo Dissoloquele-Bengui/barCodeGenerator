@@ -23,7 +23,7 @@ class BarCodeController extends Controller
     public function index()
     {
         $data['barCodes'] = BarCode::all();
-        $data['generator']=new BarcodeGeneratorHTML();
+        $data['gerador']=new BarcodeGeneratorHTML();
         return view('admin.barCode.index', $data);
     }
 
@@ -95,10 +95,11 @@ class BarCodeController extends Controller
         try {
             //dd($request);
             // Certifique-se de converter $request->qtd para um número inteiro
-            $barCode = BarCode::where('codigo', $request->codigo)->first();
+            $data['barCode'] = BarCode::where('codigo', $request->codigo)->first();
             //dd($barCode);
+            $data['gerador']=new BarcodeGeneratorHTML();
 
-            return view('admin.barCode.verify', ['barCode' => $barCode]);
+            return view('admin.barCode.verify', $data);
             //dd($barCode);
         } catch (\Throwable $th) {
             throw $th;
